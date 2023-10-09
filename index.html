@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+    <link rel="stylesheet" href="css/master.css">
+</head>
+
+<body>
+    <main>
+        <div class="clock">
+            <img src="img/download.png" alt="">
+            <span id="hour"></span>
+            <span id="min"></span>
+            <span id="sec"></span>
+            <span id="middle"></span>
+        </div>
+        <h1 id="demo"></h1>
+    </main>
+</body>
+<script>
+    let span1 = document.getElementById('hour')
+    let span2 = document.getElementById('min')
+    let span3 = document.getElementById('sec')
+
+    let t = new Date()
+    let h1 = document.getElementById('demo')
+    let sec = t.getSeconds()
+    let min = t.getMinutes()
+    let hour = t.getHours()
+    let sec2 = sec
+    let min2 = min
+    let hour2 = hour
+    
+
+
+
+
+    function rotate() {
+        span1.style.transform = 'rotate('+(((hour*30)+((min/60)*30)+((sec/3600)*30))-90)+'deg)'
+        span2.style.transform = 'rotate(' + (((min * 6) + ((sec / 60) * 6)) - 90) + 'deg)'
+        span3.style.transform = 'rotate(' + ((sec * 6)-90) + 'deg)'
+
+    }
+
+
+    rotate()
+
+
+    setInterval(() => {
+        if(sec < 59){
+            sec++
+            rotate()
+        }else{
+            sec = 0
+            if(min < 59){
+                min++
+            }else{
+                min = 0
+                if(hour < 23){
+                    hour++
+                }else{
+                    hour = 0
+                }
+                rotate()
+            }
+            rotate()
+        }
+        rotate()
+        h1.innerHTML = hour +' : '+min+' : '+sec
+        console.log(hour +' '+min+' '+sec);
+    }, 1000);
+
+</script>
+
+</html>
